@@ -1,0 +1,106 @@
+alias: "Tagreader: Set LED color"
+description: ""
+trigger:
+  - platform: state
+    entity_id:
+      - alarm_control_panel.alarmo
+    to: armed_away
+    id: armed_away
+  - platform: state
+    entity_id:
+      - alarm_control_panel.alarmo
+    to: disarmed
+    id: disarmed
+  - platform: state
+    entity_id:
+      - alarm_control_panel.alarmo
+    to: arming
+    id: arming
+  - platform: state
+    entity_id:
+      - alarm_control_panel.alarmo
+    to: pending
+    id: pending
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: disarmed
+        sequence:
+          - type: turn_off
+            device_id: 9fe061d2ca212299232a65589489f7cb
+            entity_id: light.tagreader_garage_led
+            domain: light
+          - type: turn_off
+            device_id: 6d89936e9ec001024f51617b7bcdd64c
+            entity_id: light.tagreader_bedroom2_led
+            domain: light
+          - type: turn_off
+            device_id: 765cf27c0545a25140023e7c08010935
+            entity_id: light.tagreader_frontdoor_led
+            domain: light
+      - conditions:
+          - condition: trigger
+            id: armed_away
+        sequence:
+          - service: light.turn_on
+            data:
+              color_name: red
+            target:
+              entity_id:
+                - light.tagreader_garage_led
+                - light.tagreader_bedroom2_led
+                - light.tagreader_frontdoor_led
+      - conditions:
+          - condition: or
+            conditions:
+              - condition: trigger
+                id: arming
+              - condition: trigger
+                id: pending
+        sequence:
+          - repeat:
+              until:
+                - condition: state
+                  entity_id: alarm_control_panel.alarmo
+                  state: armed_away
+              sequence:
+                - service: light.turn_on
+                  data:
+                    rgb_color:
+                      - 254
+                      - 252
+                      - 221
+                  target:
+                    entity_id:
+                      - light.tagreader_garage_led
+                      - light.tagreader_bedroom2_led
+                      - light.tagreader_frontdoor_led
+                - service: esphome.tagreader_55a980_play_rtttl
+                  data:
+                    song_str: Beep:d=32,o=6,b=100:8g
+                - service: esphome.tagreader_bedroom2_5d3bac_play_rtttl
+                  data:
+                    song_str: Beep:d=32,o=6,b=100:8g
+                - service: esphome.tagreader_frontdoor_55d8f9_play_rtttl
+                  data:
+                    song_str: Beep:d=32,o=6,b=100:8g
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 1
+                    milliseconds: 0
+                - service: light.turn_off
+                  data: {}
+                  target:
+                    entity_id:
+                      - light.tagreader_garage_led
+                      - light.tagreader_bedroom2_led
+                      - light.tagreader_frontdoor_led
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 1
+                    milliseconds: 0
+mode: restart
