@@ -1,0 +1,22 @@
+alias: "Tag: Arm and Disarm alarm-night"
+description: ""
+trigger:
+  - platform: tag
+    tag_id: 27cac199-a00d-4d31-90e3-7996ebcad731
+condition: []
+action:
+  - if:
+      - condition: state
+        entity_id: alarm_control_panel.alarmo
+        state: disarmed
+    then:
+      - service: alarm_control_panel.alarm_arm_night
+        data: {}
+        target:
+          entity_id: alarm_control_panel.alarmo
+    else:
+      - service: alarm_control_panel.alarm_disarm
+        data: {}
+        target:
+          entity_id: alarm_control_panel.alarmo
+mode: restart

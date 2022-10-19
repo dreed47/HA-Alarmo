@@ -1,0 +1,12 @@
+alias: "tag: alarm trip"
+description: ""
+trigger:
+  - platform: tag
+    tag_id: 2cd07578-c542-4899-bff1-4c75111bec8b
+condition: []
+action:
+  - device_id: c3c7c81d6ae489158b2cdb77e95d6e1d
+    domain: alarm_control_panel
+    entity_id: alarm_control_panel.alarmo
+    type: trigger
+mode: single

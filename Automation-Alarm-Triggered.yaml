@@ -1,0 +1,63 @@
+alias: Alarm Triggered
+description: ""
+trigger:
+  - platform: state
+    entity_id:
+      - alarm_control_panel.alarmo
+    to: triggered
+condition: []
+action:
+  - service: media_player.join
+    data:
+      group_members:
+        - media_player.computerrm_sonos
+        - media_player.livingroom_sonos
+        - media_player.kitchen_sonos
+        - media_player.move_sonos
+    target:
+      entity_id:
+        - media_player.livingroom_sonos
+  - service: media_player.media_stop
+    data: {}
+    target:
+      entity_id:
+        - media_player.computerrm_sonos
+        - media_player.kitchen_sonos
+        - media_player.move_sonos
+        - media_player.livingroom_sonos
+  - service: media_player.volume_set
+    data:
+      volume_level: 0.9
+    target:
+      entity_id:
+        - media_player.computerrm_sonos
+        - media_player.kitchen_sonos
+        - media_player.move_sonos
+        - media_player.livingroom_sonos
+  - service: media_player.repeat_set
+    data:
+      repeat: one
+    target:
+      entity_id: media_player.livingroom_sonos
+    enabled: true
+  - service: media_player.play_media
+    data:
+      media_content_type: favorite_item_id
+      media_content_id: FV:2/75
+      enqueue: play
+    target:
+      entity_id:
+        - media_player.computerrm_sonos
+        - media_player.kitchen_sonos
+        - media_player.move_sonos
+        - media_player.livingroom_sonos
+  - service: light.turn_on
+    data:
+      flash: short
+    target:
+      entity_id:
+        - light.chair_light
+        - light.couch_light
+        - light.floor_light
+        - light.wall_light
+mode: single
