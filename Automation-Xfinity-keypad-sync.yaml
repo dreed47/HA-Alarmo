@@ -1,0 +1,87 @@
+alias: TESTALARM111
+description: ""
+trigger:
+  - platform: mqtt
+    topic: zigbee2mqtt/Front_Door_Keypad
+    id: keypad_triggered
+condition:
+  - condition: or
+    conditions:
+      - condition: template
+        value_template: '{{ trigger.payload_json.action == "arm_day_zones"  }}'
+      - condition: template
+        value_template: '{{ trigger.payload_json.action == "disarm"  }}'
+      - condition: template
+        value_template: '{{ trigger.payload_json.action == "arm_night_zones"  }}'
+      - condition: template
+        value_template: '{{ trigger.payload_json.action == "arm_all_zones"  }}'
+action:
+  - service: persistent_notification.create
+    data:
+      message: >-
+        action:{{ trigger.payload_json.action  }} code:{{
+        trigger.payload_json.action_code  }}
+    enabled: false
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: keypad_triggered
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: '{{ trigger.payload_json.action == "arm_day_zones"  }}'
+                    alias: Template condition arm_day_zones
+                sequence:
+                  - service: persistent_notification.create
+                    data:
+                      message: arm_day_zones
+                    enabled: false
+                  - service: alarmo.arm
+                    data:
+                      entity_id: alarm_control_panel.alarmo
+                      code: "{{ trigger.payload_json.action_code }}"
+                      mode: away
+              - conditions:
+                  - condition: template
+                    value_template: '{{ trigger.payload_json.action == "arm_all_zones"  }}'
+                    alias: template condition arm_all_zones
+                sequence:
+                  - service: persistent_notification.create
+                    data:
+                      message: arm all zones
+                    enabled: false
+                  - service: alarmo.arm
+                    data:
+                      entity_id: alarm_control_panel.alarmo
+                      code: "{{ trigger.payload_json.action_code }}"
+                      mode: away
+              - conditions:
+                  - condition: template
+                    value_template: '{{ trigger.payload_json.action == "arm_night_zones"  }}'
+                    alias: template condition arm =_night_zones
+                sequence:
+                  - service: persistent_notification.create
+                    data:
+                      message: arm night zones
+                    enabled: false
+                  - service: alarmo.arm
+                    data:
+                      entity_id: alarm_control_panel.alarmo
+                      code: "{{ trigger.payload_json.action_code }}"
+                      mode: night
+              - conditions:
+                  - condition: template
+                    value_template: '{{ trigger.payload_json.action == "disarm"  }}'
+                    alias: template condition disarm
+                sequence:
+                  - service: persistent_notification.create
+                    data:
+                      message: disarm
+                    enabled: false
+                  - service: alarmo.disarm
+                    data:
+                      entity_id: alarm_control_panel.alarmo
+                      code: "{{ trigger.payload_json.action_code }}"
+mode: parallel
+max: 10

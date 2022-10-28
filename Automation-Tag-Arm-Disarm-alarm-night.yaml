@@ -11,12 +11,22 @@ action:
         state: disarmed
     then:
       - service: alarm_control_panel.alarm_arm_night
-        data: {}
+        data:
+          code: "5964"
         target:
           entity_id: alarm_control_panel.alarmo
+      - service: mqtt.publish
+        data:
+          topic: zigbee2mqtt/Front_Door_Keypad/set
+          payload: "\"{\\\"arm_mode\\\": { \\\"mode\\\": \\\"arm_night_zones\\\"}}\""
     else:
       - service: alarm_control_panel.alarm_disarm
-        data: {}
+        data:
+          code: "5964"
         target:
           entity_id: alarm_control_panel.alarmo
+      - service: mqtt.publish
+        data:
+          topic: zigbee2mqtt/Front_Door_Keypad/set
+          payload: "\"{  \\\"arm_mode\\\":  { \\\"mode\\\": \\\"disarm\\\" }}\""
 mode: restart

@@ -47,3 +47,11 @@ The tag reader will be automatically discovered by Home Assistant once the tag r
 ## Usage
 
 Scanned tags can be managed from the tags interface in Home Assistant. You can find it under config -> tags.
+
+## XFinity XHK1-UE Keypads
+
+https://www.zigbee2mqtt.io/devices/XHK1-UE.html
+
+https://community.home-assistant.io/t/xfinity-xhk1-ue-keypad-in-deconz/386237
+
+https://community.home-assistant.io/t/zigbee2mqtt-control-alarmo-via-keypad/420016/15

@@ -1,0 +1,111 @@
+blueprint:
+  name: Xfinity Keypad Alarmo Sync
+  description: Xfinity Keypad sync with Alarmo
+  domain: automation
+
+  input:
+    state_topic:
+      name: MQTT State Topic of your Zigbee2MQTT Keypad
+      description: "The State Topic is composed of your Zigbee2MQTT base_topic (see your Z2M Addon Configuration) and the Friendly Name of your keypad in Z2M. Example: zigbee2mqtt/Keypad"
+      selector:
+        text:
+    set_topic:
+      name: MQTT Set Topic of your Zigbee2MQTT Keypad
+      description: "This is the same as your State Topic, with the addition of /set. Example: zigbee2mqtt/Keypad/set"
+      selector:
+        text:
+    entity:
+      name: Alarmo entity
+      description: "An alarm control panel entity from alarmo."
+      selector:
+        entity:
+          domain: alarm_control_panel
+          integration: alarmo
+
+trigger:
+  - platform: mqtt
+    topic: !input state_topic
+    id: keypad_triggered
+
+condition:
+  - condition: or
+    conditions:
+      - condition: template
+        value_template: '{{ trigger.payload_json.action == "arm_day_zones"  }}'
+      - condition: template
+        value_template: '{{ trigger.payload_json.action == "disarm"  }}'
+      - condition: template
+        value_template: '{{ trigger.payload_json.action == "arm_night_zones"  }}'
+      - condition: template
+        value_template: '{{ trigger.payload_json.action == "arm_all_zones"  }}'
+
+action:
+  - service: persistent_notification.create
+    data:
+      message: >-
+        action:{{ trigger.payload_json.action  }} code:{{
+        trigger.payload_json.action_code  }}
+    #enabled: false
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: keypad_triggered
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: '{{ trigger.payload_json.action == "arm_day_zones"  }}'
+                    alias: Template condition arm_day_zones
+                sequence:
+                  - service: persistent_notification.create
+                    data:
+                      message: arm_day_zones
+                    #enabled: false
+                  - service: alarmo.arm
+                    data:
+                      entity_id: !input entity
+                      code: "{{ trigger.payload_json.action_code }}"
+                      mode: away
+              - conditions:
+                  - condition: template
+                    value_template: '{{ trigger.payload_json.action == "arm_all_zones"  }}'
+                    alias: template condition arm_all_zones
+                sequence:
+                  - service: persistent_notification.create
+                    data:
+                      message: arm all zones
+                    #enabled: false
+                  - service: alarmo.arm
+                    data:
+                      entity_id: !input entity
+                      code: "{{ trigger.payload_json.action_code }}"
+                      mode: away
+              - conditions:
+                  - condition: template
+                    value_template: '{{ trigger.payload_json.action == "arm_night_zones"  }}'
+                    alias: template condition arm =_night_zones
+                sequence:
+                  - service: persistent_notification.create
+                    data:
+                      message: arm night zones
+                    #enabled: false
+                  - service: alarmo.arm
+                    data:
+                      entity_id: !input entity
+                      code: "{{ trigger.payload_json.action_code }}"
+                      mode: night
+              - conditions:
+                  - condition: template
+                    value_template: '{{ trigger.payload_json.action == "disarm"  }}'
+                    alias: template condition disarm
+                sequence:
+                  - service: persistent_notification.create
+                    data:
+                      message: disarm
+                    #enabled: false
+                  - service: alarmo.disarm
+                    data:
+                      entity_id: !input entity
+                      code: "{{ trigger.payload_json.action_code }}"
+mode: parallel
+max: 10
