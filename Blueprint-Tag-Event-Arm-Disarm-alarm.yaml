@@ -1,0 +1,144 @@
+blueprint:
+  name: Tag and Event Arm and Disarm alarm ver 1.1
+  description: Tag and Event Arm and Disarm alarm ver 1.1
+  domain: automation
+
+  input:
+    tag1:
+      name: Trigger Tag Id
+      description: "Tag Id that triggers the Arm/Disarm action"
+      selector:
+        text:
+    tag2:
+      name: Trigger Tag Id
+      description: "Tag Id that triggers the Arm/Disarm action"
+      selector:
+        text:
+    tag3:
+      name: Trigger Tag Id
+      description: "Tag Id that triggers the Arm/Disarm action"
+      selector:
+        text:
+    tag4:
+      name: Trigger Tag Id
+      description: "Tag Id that triggers the Arm/Disarm action"
+      selector:
+        text:
+    event_type1:
+      name: Trigger Event Type
+      description: "Event Type that triggers the Arm/Disarm action"
+      selector:
+        text:
+    event_type2:
+      name: Trigger Event Type
+      description: "Event Type that triggers the Arm/Disarm action"
+      selector:
+        text:
+    keypad_arm_mode:
+      name: Keypad Arm Mode
+      description: "Keypad Arm Mode"
+      selector:
+        select:
+          options:
+            - "arm_all_zones"
+            - "arm_day_zones"
+            - "arm_night_zones"
+    alarm_arm_mode:
+      name: Alarm Arm Mode
+      description: "Alarm Arm Mode"
+      selector:
+        select:
+          options:
+            - "away"
+            - "home"
+            - "night"
+    code:
+      name: Alarm code
+      description: "Alarm code"
+      selector:
+        text:
+    keypad1_topic:
+      name: Keypad 1 MQTT Topic
+      description: "The Topic is composed of your Zigbee2MQTT base_topic (see your Z2M Addon Configuration) and the Friendly Name of your keypad in Z2M. Example: zigbee2mqtt/Keypad"
+      selector:
+        text:
+    keypad2_topic:
+      name: Keypad 2 MQTT Topic
+      description: "The Topic is composed of your Zigbee2MQTT base_topic (see your Z2M Addon Configuration) and the Friendly Name of your keypad in Z2M. Example: zigbee2mqtt/Keypad"
+      selector:
+        text:
+    keypad3_topic:
+      name: Keypad 3 MQTT Topic
+      description: "The Topic is composed of your Zigbee2MQTT base_topic (see your Z2M Addon Configuration) and the Friendly Name of your keypad in Z2M. Example: zigbee2mqtt/Keypad"
+      selector:
+        text:
+    entity:
+      name: Alarmo entity
+      description: "An alarm control panel entity from alarmo."
+      selector:
+        entity:
+          domain: alarm_control_panel
+          integration: alarmo
+variables:
+  keypad_arm_mode_var: !input "keypad_arm_mode"
+  set_topic1_var: !input "keypad1_topic"
+  set_topic2_var: !input "keypad2_topic"
+  set_topic3_var: !input "keypad3_topic"
+
+trigger:
+  - platform: tag
+    tag_id: !input tag1
+  - platform: tag
+    tag_id: !input tag2
+  - platform: tag
+    tag_id: !input tag3
+  - platform: tag
+    tag_id: !input tag4
+  - platform: event
+    event_type: !input event_type1
+  - platform: event
+    event_type: !input event_type2
+condition: []
+action:
+  - if:
+      - condition: state
+        entity_id: !input entity
+        state: disarmed
+    then:
+      - service: alarmo.arm
+        data:
+          entity_id: !input entity
+          code: !input code
+          mode: !input alarm_arm_mode
+      - service: mqtt.publish
+        data:
+          topic_template: "{{ set_topic1_var }}/set"
+          payload_template: '{"arm_mode": {"mode": "{{ keypad_arm_mode_var }}"}}'
+      - service: mqtt.publish
+        data:
+          topic_template: "{{ set_topic2_var }}/set"
+          payload_template: '{"arm_mode": {"mode": "{{ keypad_arm_mode_var }}"}}'
+      - service: mqtt.publish
+        data:
+          topic_template: "{{ set_topic3_var }}/set"
+          payload_template: '{"arm_mode": {"mode": "{{ keypad_arm_mode_var }}"}}'
+
+    else:
+      - service: alarmo.disarm
+        data:
+          entity_id: !input entity
+          code: !input code
+      - service: mqtt.publish
+        data:
+          topic_template: "{{ set_topic1_var }}/set"
+          payload: '{"arm_mode": {"mode": "disarm"}}'
+      - service: mqtt.publish
+        data:
+          topic_template: "{{ set_topic2_var }}/set"
+          payload: '{"arm_mode": {"mode": "disarm"}}'
+      - service: mqtt.publish
+        data:
+          topic_template: "{{ set_topic3_var }}/set"
+          payload: '{"arm_mode": {"mode": "disarm"}}'
+
+mode: restart

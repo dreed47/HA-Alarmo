@@ -44,7 +44,7 @@ blueprint:
       selector:
         text:
     state_topic:
-      name: MQTT State Topic of your Zigbee2MQTT Keypad
+      name: MQTT State Topic of your first Zigbee2MQTT Keypad
       description: "The State Topic is composed of your Zigbee2MQTT base_topic (see your Z2M Addon Configuration) and the Friendly Name of your keypad in Z2M. Example: zigbee2mqtt/Keypad"
       selector:
         text:
@@ -62,6 +62,7 @@ blueprint:
           integration: alarmo
 variables:
   arm_mode_var: !input "arm_mode"
+  set_topic1_var: !input "state_topic"
 
 trigger:
   - platform: tag
@@ -88,7 +89,7 @@ action:
           mode: night
       - service: mqtt.publish
         data:
-          topic: !input set_topic
+          topic_template: "{{ set_topic1_var }}/set"
           payload_template: '{"arm_mode": {"mode": "{{ arm_mode_var }}"}}'
     else:
       - service: alarmo.disarm
@@ -97,6 +98,6 @@ action:
           code: !input code
       - service: mqtt.publish
         data:
-          topic: !input set_topic
+          topic_template: "{{ set_topic1_var }}/set"
           payload: "\"{  \\\"arm_mode\\\":  { \\\"mode\\\": \\\"disarm\\\" }}\""
 mode: restart

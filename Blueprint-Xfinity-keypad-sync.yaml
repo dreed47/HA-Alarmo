@@ -1,17 +1,22 @@
 blueprint:
-  name: Xfinity Keypad Alarmo Sync
-  description: Xfinity Keypad sync with Alarmo
+  name: Xfinity Keypad Alarmo Sync ver 1.1
+  description: Xfinity Keypad sync with Alarmo ver 1.1
   domain: automation
 
   input:
-    state_topic:
-      name: MQTT State Topic of your Zigbee2MQTT Keypad
-      description: "The State Topic is composed of your Zigbee2MQTT base_topic (see your Z2M Addon Configuration) and the Friendly Name of your keypad in Z2M. Example: zigbee2mqtt/Keypad"
+    keypad1_topic:
+      name: Keypad 1 MQTT Topic
+      description: "The Topic is composed of your Zigbee2MQTT base_topic (see your Z2M Addon Configuration) and the Friendly Name of your keypad in Z2M. Example: zigbee2mqtt/Keypad"
       selector:
         text:
-    set_topic:
-      name: MQTT Set Topic of your Zigbee2MQTT Keypad
-      description: "This is the same as your State Topic, with the addition of /set. Example: zigbee2mqtt/Keypad/set"
+    keypad2_topic:
+      name: Keypad 2 MQTT Topic
+      description: "The Topic is composed of your Zigbee2MQTT base_topic (see your Z2M Addon Configuration) and the Friendly Name of your keypad in Z2M. Example: zigbee2mqtt/Keypad"
+      selector:
+        text:
+    keypad3_topic:
+      name: Keypad 3 MQTT Topic
+      description: "The Topic is composed of your Zigbee2MQTT base_topic (see your Z2M Addon Configuration) and the Friendly Name of your keypad in Z2M. Example: zigbee2mqtt/Keypad"
       selector:
         text:
     entity:
@@ -24,8 +29,14 @@ blueprint:
 
 trigger:
   - platform: mqtt
-    topic: !input state_topic
-    id: keypad_triggered
+    topic: !input keypad1_topic
+    id: keypad1_triggered
+  - platform: mqtt
+    topic: !input keypad2_topic
+    id: keypad2_triggered
+  - platform: mqtt
+    topic: !input keypad3_topic
+    id: keypad3_triggered
 
 condition:
   - condition: or
@@ -45,11 +56,17 @@ action:
       message: >-
         action:{{ trigger.payload_json.action  }} code:{{
         trigger.payload_json.action_code  }}
-    #enabled: false
+    enabled: false
   - choose:
       - conditions:
-          - condition: trigger
-            id: keypad_triggered
+          - condition: or
+            conditions:
+              - condition: trigger
+                id: keypad1_triggered
+              - condition: trigger
+                id: keypad2_triggered
+               - condition: trigger
+                id: keypad3_triggered
         sequence:
           - choose:
               - conditions:
@@ -60,7 +77,7 @@ action:
                   - service: persistent_notification.create
                     data:
                       message: arm_day_zones
-                    #enabled: false
+                    enabled: false
                   - service: alarmo.arm
                     data:
                       entity_id: !input entity
@@ -74,7 +91,7 @@ action:
                   - service: persistent_notification.create
                     data:
                       message: arm all zones
-                    #enabled: false
+                    enabled: false
                   - service: alarmo.arm
                     data:
                       entity_id: !input entity
@@ -88,7 +105,7 @@ action:
                   - service: persistent_notification.create
                     data:
                       message: arm night zones
-                    #enabled: false
+                    enabled: false
                   - service: alarmo.arm
                     data:
                       entity_id: !input entity
@@ -102,7 +119,7 @@ action:
                   - service: persistent_notification.create
                     data:
                       message: disarm
-                    #enabled: false
+                    enabled: false
                   - service: alarmo.disarm
                     data:
                       entity_id: !input entity
