@@ -55,3 +55,15 @@ https://www.zigbee2mqtt.io/devices/XHK1-UE.html
 https://community.home-assistant.io/t/xfinity-xhk1-ue-keypad-in-deconz/386237
 
 https://community.home-assistant.io/t/zigbee2mqtt-control-alarmo-via-keypad/420016/15
+
+## Centralite 3400
+
+Pairing
+
+ve got 3400-X and this method doesn't work for me, but the factory default one works.
+
+Remove batteries (both!)
+Press the tamper button on the back and keep pressing it.
+Insert one (!) battery
+After keypad is lit up, immediately release the tamper button (doesn't seem to work its kept pressed few more seconds)
+I recommend doing that with just one battery, as those batteries don't slid in and out easily and the device works with one as fine as with two, therefore inserting two batteries during setup messes up timing in point 4.

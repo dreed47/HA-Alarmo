@@ -1,6 +1,6 @@
 blueprint:
-  name: Xfinity Keypad Alarmo Sync ver 1.1
-  description: Xfinity Keypad sync with Alarmo ver 1.1
+  name: Xfinity Keypad Alarmo Sync ver 1.2
+  description: Xfinity Keypad sync with Alarmo ver 1.2
   domain: automation
 
   input:
@@ -19,6 +19,12 @@ blueprint:
       description: "The Topic is composed of your Zigbee2MQTT base_topic (see your Z2M Addon Configuration) and the Friendly Name of your keypad in Z2M. Example: zigbee2mqtt/Keypad"
       selector:
         text:
+    keypad4_topic:
+      name: Keypad 4 MQTT Topic
+      description: "The Topic is composed of your Zigbee2MQTT base_topic (see your Z2M Addon Configuration) and the Friendly Name of your keypad in Z2M. Example: zigbee2mqtt/Keypad"
+      selector:
+        text:
+
     entity:
       name: Alarmo entity
       description: "An alarm control panel entity from alarmo."
@@ -37,6 +43,9 @@ trigger:
   - platform: mqtt
     topic: !input keypad3_topic
     id: keypad3_triggered
+  - platform: mqtt
+    topic: !input keypad4_topic
+    id: keypad4_triggered
 
 condition:
   - condition: or
@@ -65,8 +74,11 @@ action:
                 id: keypad1_triggered
               - condition: trigger
                 id: keypad2_triggered
-               - condition: trigger
+              - condition: trigger
                 id: keypad3_triggered
+              - condition: trigger
+                id: keypad4_triggered
+
         sequence:
           - choose:
               - conditions:
@@ -124,5 +136,12 @@ action:
                     data:
                       entity_id: !input entity
                       code: "{{ trigger.payload_json.action_code }}"
+                  - service: switch.turn_off
+                    data: {}
+                    target:
+                      entity_id:
+                        - switch.smart_plug_6_socket
+                        - switch.smart_plug_5_socket
+
 mode: parallel
 max: 10
