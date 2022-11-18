@@ -12,4 +12,5 @@
 * [Linkind Water Leak Detector](https://www.amazon.com/gp/product/B08YDB1PCK/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&th=1)
 * [Xfinity XHK1-UE Security Alarm Keypad](https://www.ebay.com/itm/324974319228)
 * [THIRDREALITY Zigbee Smart Plug](https://www.amazon.com/gp/product/B09KNDM4VV/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
+* [CXBER Home Zigbee Smart Plug](https://www.amazon.com/gp/product/B0BJ6DQXKF/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&th=1)
 * [Custom NFC Tag Reader](TAG_READER.md)
