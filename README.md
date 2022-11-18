@@ -23,5 +23,7 @@
 
 #### (Optional)
 
-* Buy/Build one or more [Custom NFC Tag Readers](TAG_READER.md)
-* Procure security keypad(s) [(Supported Keypads)](https://www.zigbee2mqtt.io/supported-devices/#s=keypad)
+* Buy/Build one or more and install in Home Assistant [Custom NFC Tag Readers](TAG_READER.md)
+* Procure security keypad(s) and pair with zigbee2mqtt [(Supported Keypads)](https://www.zigbee2mqtt.io/supported-devices/#s=keypad)
+* Create an automation using the Blueprint-Xfinity-keypad-sync [blueprint](scripts/Blueprint-Xfinity-keypad-sync.yaml)
+* Create an automation using the Blueprint-Tag-Event-Arm-Disarm-alarm [blueprint](scripts/Blueprint-Tag-Event-Arm-Disarm-alarm.yaml)
