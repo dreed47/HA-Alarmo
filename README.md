@@ -14,3 +14,8 @@
 * [THIRDREALITY Zigbee Smart Plug](https://www.amazon.com/gp/product/B09KNDM4VV/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
 * [CXBER Home Zigbee Smart Plug](https://www.amazon.com/gp/product/B0BJ6DQXKF/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&th=1)
 * [Custom NFC Tag Reader](TAG_READER.md)
+
+## General Install Notes
+
+* Procure Zigbee adapter of your choice ([Supported Adapters](https://www.zigbee2mqtt.io/guide/adapters/#recommended))
+* Install zigbee2mqtt Home Assistant Addon - [(Instructions)](https://github.com/zigbee2mqtt/hassio-zigbee2mqtt#installation)
