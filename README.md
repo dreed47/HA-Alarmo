@@ -24,4 +24,4 @@
 #### (Optional)
 
 * Buy/Build one or more [Custom NFC Tag Readers](TAG_READER.md)
-*
+* Procure security keypad(s) [(Supported Keypads)](https://www.zigbee2mqtt.io/supported-devices/#s=keypad)
