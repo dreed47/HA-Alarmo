@@ -19,3 +19,9 @@
 
 * Procure Zigbee adapter of your choice ([Supported Adapters](https://www.zigbee2mqtt.io/guide/adapters/#recommended))
 * Install zigbee2mqtt Home Assistant Addon - [(Instructions)](https://github.com/zigbee2mqtt/hassio-zigbee2mqtt#installation)
+* Procure, pair, install zigbee devices of your choice [(Supported Devices)](https://www.zigbee2mqtt.io/supported-devices/)
+
+#### (Optional)
+
+* Buy/Build one or more [Custom NFC Tag Readers](TAG_READER.md)
+*
