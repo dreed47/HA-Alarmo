@@ -1,0 +1,98 @@
+type: vertical-stack
+cards:
+  - type: custom:mushroom-title-card
+    title: Door Contact Sensors
+  - type: horizontal-stack
+    cards:
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: template
+            entity: binary_sensor.front_door_sensor_contact
+            icon: |2-
+                        {% if is_state('binary_sensor.front_door_sensor_contact', 'off') %}
+                          mdi:door-closed
+                        {% else %}
+                          mdi:door-open
+                        {% endif %}
+            icon_color: |2-
+                        {% if is_state('binary_sensor.front_door_sensor_contact', 'off') %}
+                          green
+                        {% else %}
+                          red
+                        {% endif %}
+            content: Front
+          - type: template
+            entity: binary_sensor.garage_side_door_sensor_contact
+            icon: |2-
+                        {% if is_state('binary_sensor.garage_side_door_sensor_contact', 'off') %}
+                          mdi:door-closed
+                        {% else %}
+                          mdi:door-open
+                        {% endif %}
+            icon_color: |2-
+                        {% if is_state('binary_sensor.garage_side_door_sensor_contact', 'off') %}
+                          green
+                        {% else %}
+                          red
+                        {% endif %}
+            content: Garage Side
+          - type: template
+            entity: binary_sensor.basement_door_sensor_contact
+            icon: |2-
+                        {% if is_state('binary_sensor.basement_door_sensor_contact', 'off') %}
+                          mdi:door-closed
+                        {% else %}
+                          mdi:door-open
+                        {% endif %}
+            icon_color: |2-
+                        {% if is_state('binary_sensor.basement_door_sensor_contact', 'off') %}
+                          green
+                        {% else %}
+                          red
+                        {% endif %}
+            content: Basement
+          - type: template
+            entity: binary_sensor.porch_door_sensor_contact
+            icon: |2-
+                        {% if is_state('binary_sensor.porch_door_sensor_contact', 'off') %}
+                          mdi:door-closed
+                        {% else %}
+                          mdi:door-open
+                        {% endif %}
+            icon_color: |2-
+                        {% if is_state('binary_sensor.porch_door_sensor_contact', 'off') %}
+                          green
+                        {% else %}
+                          red
+                        {% endif %}
+            content: Porch
+          - type: template
+            entity: binary_sensor.basement_kitchen_door_sensor_contact
+            icon: |2-
+                        {% if is_state('binary_sensor.basement_kitchen_door_sensor_contact', 'off') %}
+                          mdi:door-closed
+                        {% else %}
+                          mdi:door-open
+                        {% endif %}
+            icon_color: |2-
+                        {% if is_state('binary_sensor.basement_kitchen_door_sensor_contact', 'off') %}
+                          green
+                        {% else %}
+                          red
+                        {% endif %}
+            content: Kitchen Basement
+          - type: template
+            entity: binary_sensor.garage_door_sensor_contact
+            icon: |2-
+                        {% if is_state('binary_sensor.garage_door_sensor_contact', 'off') %}
+                          mdi:door-closed
+                        {% else %}
+                          mdi:door-open
+                        {% endif %}
+            icon_color: |2-
+                        {% if is_state('binary_sensor.garage_door_sensor_contact', 'off') %}
+                          green
+                        {% else %}
+                          red
+                        {% endif %}
+            content: Garage

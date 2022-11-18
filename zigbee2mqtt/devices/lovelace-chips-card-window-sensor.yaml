@@ -1,0 +1,98 @@
+type: vertical-stack
+cards:
+  - type: custom:mushroom-title-card
+    title: Window Contact Sensors
+  - type: horizontal-stack
+    cards:
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: template
+            entity: binary_sensor.basement_office_window_sensor_contact
+            icon: |2-
+                        {% if is_state('binary_sensor.basement_office_window_sensor_contact', 'off') %}
+                          mdi:window-closed
+                        {% else %}
+                          mdi:window-open
+                        {% endif %}
+            icon_color: |2-
+                        {% if is_state('binary_sensor.basement_office_window_sensor_contact', 'off') %}
+                          green
+                        {% else %}
+                          red
+                        {% endif %}
+            content: Office
+          - type: template
+            entity: binary_sensor.dining_room_window1_sensor_contact
+            icon: |2-
+                        {% if is_state('binary_sensor.dining_room_window1_sensor_contact', 'off') %}
+                          mdi:window-closed
+                        {% else %}
+                          mdi:window-open
+                        {% endif %}
+            icon_color: |2-
+                        {% if is_state('binary_sensor.dining_room_window1_sensor_contact', 'off') %}
+                          green
+                        {% else %}
+                          red
+                        {% endif %}
+            content: Dining Room 1
+          - type: template
+            entity: binary_sensor.dining_room_window2_sensor_contact
+            icon: |2-
+                        {% if is_state('binary_sensor.dining_room_window2_sensor_contact', 'off') %}
+                          mdi:window-closed
+                        {% else %}
+                          mdi:window-open
+                        {% endif %}
+            icon_color: |2-
+                        {% if is_state('binary_sensor.dining_room_window2_sensor_contact', 'off') %}
+                          green
+                        {% else %}
+                          red
+                        {% endif %}
+            content: Dining Room 2
+          - type: template
+            entity: binary_sensor.dining_room_window2_sensor_contact
+            icon: |2-
+                        {% if is_state('binary_sensor.dining_room_window2_sensor_contact', 'off') %}
+                          mdi:window-closed
+                        {% else %}
+                          mdi:window-open
+                        {% endif %}
+            icon_color: |2-
+                        {% if is_state('binary_sensor.dining_room_window2_sensor_contact', 'off') %}
+                          green
+                        {% else %}
+                          red
+                        {% endif %}
+            content: Dining Room 2
+          - type: template
+            entity: binary_sensor.dining_room_window2_sensor_contact
+            icon: |2-
+                        {% if is_state('binary_sensor.dining_room_window2_sensor_contact', 'off') %}
+                          mdi:window-closed
+                        {% else %}
+                          mdi:window-open
+                        {% endif %}
+            icon_color: |2-
+                        {% if is_state('binary_sensor.dining_room_window2_sensor_contact', 'off') %}
+                          green
+                        {% else %}
+                          red
+                        {% endif %}
+            content: Dining Room 2
+          - type: template
+            entity: binary_sensor.dining_room_window2_sensor_contact
+            icon: |2-
+                        {% if is_state('binary_sensor.dining_room_window2_sensor_contact', 'off') %}
+                          mdi:window-closed
+                        {% else %}
+                          mdi:window-open
+                        {% endif %}
+            icon_color: |2-
+                        {% if is_state('binary_sensor.dining_room_window2_sensor_contact', 'off') %}
+                          green
+                        {% else %}
+                          red
+                        {% endif %}
+            content: Dining Room 2

@@ -1,0 +1,83 @@
+type: vertical-stack
+cards:
+  - type: custom:mushroom-title-card
+    title: Motion Sensors
+  - type: horizontal-stack
+    cards:
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: template
+            entity: binary_sensor.hall_motion_occupancy
+            icon: |2-
+                                      {% if is_state('binary_sensor.hall_motion_occupancy', 'off') %}
+                                        mdi:motion-sensor-off
+                                      {% else %}
+                                        mdi:motion-sensor
+                                      {% endif %}
+            icon_color: |2-
+                                      {% if is_state('binary_sensor.hall_motion_occupancy', 'off') %}
+                                        green
+                                      {% else %}
+                                        red
+                                      {% endif %}
+            content: Hall
+          - type: template
+            entity: binary_sensor.kitchen_motion_occupancy
+            icon: |2-
+                                      {% if is_state('binary_sensor.kitchen_motion_occupancy', 'off') %}
+                                        mdi:motion-sensor-off
+                                      {% else %}
+                                        mdi:motion-sensor
+                                      {% endif %}
+            icon_color: |2-
+                                      {% if is_state('binary_sensor.kitchen_motion_occupancy', 'off') %}
+                                        green
+                                      {% else %}
+                                        red
+                                      {% endif %}
+            content: Kitchen
+          - type: template
+            entity: binary_sensor.livingroom_motion_occupancy
+            icon: |2-
+                                      {% if is_state('binary_sensor.livingroom_motion_occupancy', 'off') %}
+                                        mdi:motion-sensor-off
+                                      {% else %}
+                                        mdi:motion-sensor
+                                      {% endif %}
+            icon_color: |2-
+                                      {% if is_state('binary_sensor.livingroom_motion_occupancy', 'off') %}
+                                        green
+                                      {% else %}
+                                        red
+                                      {% endif %}
+            content: Living Room
+          - type: template
+            entity: binary_sensor.garage_motion_occupancy
+            icon: |2-
+                                      {% if is_state('binary_sensor.garage_motion_occupancy', 'off') %}
+                                        mdi:motion-sensor-off
+                                      {% else %}
+                                        mdi:motion-sensor
+                                      {% endif %}
+            icon_color: |2-
+                                      {% if is_state('binary_sensor.garage_motion_occupancy', 'off') %}
+                                        green
+                                      {% else %}
+                                        red
+                                      {% endif %}
+            content: Garage
+          - type: template
+            entity: binary_sensor.basement_motion_occupancy
+            icon: |2-
+                                      {% if is_state('binary_sensor.basement_motion_occupancy', 'off') %}
+                                        mdi:motion-sensor-off
+                                      {% else %}
+                                        mdi:motion-sensor
+                                      {% endif %}
+            icon_color: |2-
+                                      {% if is_state('binary_sensor.basement_motion_occupancy', 'off') %}
+                                        green
+                                      {% else %}
+                                        red
+                                      {% endif %}
+            content: Basement

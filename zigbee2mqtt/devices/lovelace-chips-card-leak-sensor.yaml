@@ -1,0 +1,158 @@
+type: vertical-stack
+cards:
+  - type: custom:mushroom-title-card
+    title: Leak Sensors
+  - type: horizontal-stack
+    cards:
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: template
+            content: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  Kitchen Leak: No
+              {% else %}
+                    Kitchen Leak: YES!
+              {% endif %}
+            icon: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  mdi:water-off
+              {% else %}
+                  mdi:water
+              {% endif %}
+            icon_color: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  cyan
+              {% else %}
+                  red
+              {% endif %}
+            entity: binary_sensor.kitchen_sink_leak_water_leak
+            tap_action:
+              action: more-info
+          - type: template
+            content: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  Kitchen Leak: No
+              {% else %}
+                    Kitchen Leak: YES!
+              {% endif %}
+            icon: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  mdi:water-off
+              {% else %}
+                  mdi:water
+              {% endif %}
+            icon_color: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  cyan
+              {% else %}
+                  red
+              {% endif %}
+            entity: binary_sensor.kitchen_sink_leak_water_leak
+            tap_action:
+              action: more-info
+          - type: template
+            content: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  Kitchen Leak: No
+              {% else %}
+                    Kitchen Leak: YES!
+              {% endif %}
+            icon: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  mdi:water-off
+              {% else %}
+                  mdi:water
+              {% endif %}
+            icon_color: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  cyan
+              {% else %}
+                  red
+              {% endif %}
+            entity: binary_sensor.kitchen_sink_leak_water_leak
+            tap_action:
+              action: more-info
+          - type: template
+            content: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  Kitchen Leak: No
+              {% else %}
+                    Kitchen Leak: YES!
+              {% endif %}
+            icon: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  mdi:water-off
+              {% else %}
+                  mdi:water
+              {% endif %}
+            icon_color: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  cyan
+              {% else %}
+                  red
+              {% endif %}
+            entity: binary_sensor.kitchen_sink_leak_water_leak
+            tap_action:
+              action: more-info
+          - type: template
+            content: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  Kitchen Leak: No
+              {% else %}
+                    Kitchen Leak: YES!
+              {% endif %}
+            icon: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  mdi:water-off
+              {% else %}
+                  mdi:water
+              {% endif %}
+            icon_color: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  cyan
+              {% else %}
+                  red
+              {% endif %}
+            entity: binary_sensor.kitchen_sink_leak_water_leak
+            tap_action:
+              action: more-info
+          - type: template
+            content: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  Kitchen Leak: No
+              {% else %}
+                    Kitchen Leak: YES!
+              {% endif %}
+            icon: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  mdi:water-off
+              {% else %}
+                  mdi:water
+              {% endif %}
+            icon_color: >-
+              {% if is_state('binary_sensor.kitchen_sink_leak_water_leak',
+              'off') %}
+                  cyan
+              {% else %}
+                  red
+              {% endif %}
+            entity: binary_sensor.kitchen_sink_leak_water_leak
+            tap_action:
+              action: more-info
