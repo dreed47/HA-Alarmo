@@ -1,0 +1,34 @@
+alias: Alarm Triggered with Siren
+description: ""
+trigger:
+  - platform: state
+    entity_id:
+      - alarm_control_panel.alarmo
+    to: triggered
+condition: []
+action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id:
+        - switch.smart_plug_6_socket
+        - switch.smart_plug_5_socket
+  - service: light.turn_on
+    data:
+      flash: short
+    target:
+      entity_id:
+        - light.chair_light
+        - light.couch_light
+        - light.floor_light
+        - light.wall_light
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id:
+        - switch.sink_light
+        - switch.fridge_light_socket
+        - switch.counter_light_socket
+        - switch.stove_light_socket
+        - switch.computer_room_light_socket
+mode: single

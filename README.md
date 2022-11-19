@@ -13,6 +13,7 @@
 * [Xfinity XHK1-UE Security Alarm Keypad](https://www.ebay.com/itm/324974319228)
 * [THIRDREALITY Zigbee Smart Plug](https://www.amazon.com/gp/product/B09KNDM4VV/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
 * [CXBER Home Zigbee Smart Plug](https://www.amazon.com/gp/product/B0BJ6DQXKF/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&th=1)
+* [Wired Alarm Siren Horn](https://www.amazon.com/gp/product/B07P1FNJTG/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&th=1) [(Siren 12V 2A Power Supply)](https://www.amazon.com/gp/product/B077PW5JC3/ref=ppx_od_dt_b_asin_title_s00?ie=UTF8&psc=1)
 * [Custom NFC Tag Reader](TAG_READER.md)
 
 ## General Install Notes
@@ -27,3 +28,4 @@
 * Procure security keypad(s) and pair with zigbee2mqtt [(Supported Keypads)](https://www.zigbee2mqtt.io/supported-devices/#s=keypad)
 * Create an automation using the Blueprint-Xfinity-keypad-sync [blueprint](scripts/Blueprint-Xfinity-keypad-sync.yaml)
 * Create an automation using the Blueprint-Tag-Event-Arm-Disarm-alarm [blueprint](scripts/Blueprint-Tag-Event-Arm-Disarm-alarm.yaml)
+* Create automations to react to triggered and disarmed alarm per your requirements

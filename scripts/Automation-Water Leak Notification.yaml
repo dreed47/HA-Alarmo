@@ -1,0 +1,37 @@
+alias: Water Leak Notification
+description: ""
+trigger:
+  - platform: state
+    entity_id:
+      - binary_sensor.hot_water_furnace_leak_water_leak
+    to: "on"
+    id: furnace
+  - platform: state
+    entity_id:
+      - binary_sensor.basement_bathroom_leak_water_leak
+    to: "on"
+  - platform: state
+    entity_id:
+      - binary_sensor.kitchen_sink_leak_water_leak
+    to: "on"
+  - platform: state
+    entity_id:
+      - binary_sensor.guest_bathroom_leak_water_leak
+    to: "on"
+  - platform: state
+    entity_id:
+      - binary_sensor.master_bathroom_leak_water_leak
+    to: "on"
+  - platform: state
+    entity_id:
+      - binary_sensor.first_floor_bathroom_leak_water_leak
+    to: "on"
+condition: []
+action:
+  - service: notify.mobile_app_davids_iphone_13_pro_max
+    data:
+      message: Water Leak Detected! {{ trigger.to_state.attributes.friendly_name }}
+  - service: notify.mobile_app_carols_iphone
+    data:
+      message: Water Leak Detected! {{ trigger.to_state.attributes.friendly_name }}
+mode: single
