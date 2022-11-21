@@ -29,3 +29,14 @@
 * Create an automation using the Blueprint-Xfinity-keypad-sync [blueprint](scripts/Blueprint-Xfinity-keypad-sync.yaml)
 * Create an automation using the Blueprint-Tag-Event-Arm-Disarm-alarm [blueprint](scripts/Blueprint-Tag-Event-Arm-Disarm-alarm.yaml)
 * Create automations to react to triggered and disarmed alarm per your requirements
+
+## Notes
+
+#### Template code to get all battery levels
+```
+{% set entities = states.sensor|selectattr('entity_id', 'search', 'battery')|rejectattr('state', 'eq', 'unknown')|rejectattr('entity_id', 'search', 'phone')|rejectattr('entity_id', 'search', 'ipad')|rejectattr('entity_id', 'search', '403_front_door')|rejectattr('entity_id', 'search', '_tempest') %}
+{% for entity in entities -%}
+  {{ entity.name ~ ': **' ~ entity.state ~ '%**' }}
+{% endfor %}
+For more informa
+```
