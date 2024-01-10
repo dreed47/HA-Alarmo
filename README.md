@@ -40,3 +40,94 @@
 {% endfor %}
 For more informa
 ```
+
+Zigbee devices
+
+Coordinator
+
+iTead SONOFF - ZBDongle-E
+* Firmware flasher
+
+Routers - Plugs
+
+eWeLink SA-003-Zigbee
+* Mantle plug - LQI - 216
+* Curio Cabinet Light Plug - LQI - 132
+* Computer Room Plug - LQI - 240
+* Aaron Bedroom Plug - LQI - 160
+* Basement Family Room Plug 2 - LQI 128
+
+Third Reality 3RSP019BZ
+* Garage Plug - LQI - 224
+* Kitchen Plug - LQI - 216
+* Basement Family Room Plug - LQI - 208
+* Master Bedroom Plug - LQI - 172
+
+SONOFF - S40ZBTPB
+* Upstairs Hall Plug - LQI - 148
+
+Sengled E1C-NB7
+* 4—— 
+
+Innr - SP 244
+* 8 ——
+
+Routers - Bulbs
+
+EcoSmart - D1533
+* Kitchen Sink Light 1 - LQI - 152
+* Kitchen Sink Light 2 - LQI - 144
+
+Routers - Siren
+
+Neo - Routers - Bulbs
+* Garage Siren - LQI -  136
+* Mantle Siren - LQI - 204
+* Upstairs Siren - LQI - 160
+
+
+End Devices - Motion Sensors
+
+Xiaomi - RTCGQ14LM
+* Livingroom Motion - LQI - 196
+* Hall Motion - LQI - 255
+* Kitchen Motion - LQI - 128
+* Basement Motion - LQI - 212
+
+Third Reality - 3RMS16BZ
+* Garage Motion - LQI - 204
+
+End Devices - Contact Sensors
+
+Leedarson - LDHD2AZW
+* Garage Side Door Sensor
+* Basement Kitchen Door Sensor
+
+Linkind - ZS110050078
+* Computer Room Window 2 Sensor
+* Living Room Window 2 Sensor
+* Basement Office Window Sensor
+
+Universal Electronics Inc - XHS2-UE
+* Computer Room Window 1 Sensor
+* Dining Room Window1 Sensor
+* Dining Room Window2 Sensor
+* Front Door Sensor
+* Garage Door Sensor
+* First Floor Bathroom Window Sensor
+* Porch Door Sensor
+* Living Room Window 1 Sensor
+* Master Bedroom Window 2 Sensor
+* Master Bedroom Window 1 Sensor
+* Emily's Bedroom Window Sensor
+* Leos Bedroom Window Sensor
+* Basement Door Sensor
+
+End Devices - Leak Detectors
+
+Linkind - LS21001
+* Guest Bathroom Leak
+* Basement Bathroom Leak
+* Hot Water Furnace Leak
+* First Floor Bath Leak
+* Kitchen Leak
