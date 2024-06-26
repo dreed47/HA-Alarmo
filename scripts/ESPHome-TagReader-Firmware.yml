@@ -1,3 +1,8 @@
+substitutions:
+  name: tagreader-NAME
+  friendly_name: TagReader NAME
+  device_ip: IP_ADDR_HERE
+
 # Insert your SSID and Your PWD after initial setup
 wifi:
   networks:
@@ -5,18 +10,17 @@ wifi:
       password: !secret wifi_password
   ap:
     ssid: ${name}
+  domain: .home  
+  use_address: $device_ip
 
 # Enable the captive portal for initial WiFi setup
 captive_portal:
 
 dashboard_import:
-  package_import_url: github://dreed47/HA-Alarmo/ESPHome-TagReader.yaml
+  package_import_url: github://smarthomejunkie/tagreader/tagreader.yaml
 
 improv_serial:
 
-substitutions:
-  name: tagreader-TAG-READER-NAME-GOES-HERE
-  friendly_name: TagReader TAG-READER-NAME-GOES-HERE
 
 esphome:
   name: $name
@@ -25,7 +29,7 @@ esphome:
 
   # Automatically add the mac address to the name
   # so you can use a single firmware for all devices
-  name_add_mac_suffix: true
+  name_add_mac_suffix: false
 
   # This will allow for (future) project identification,
   # configuration and updates.
@@ -220,7 +224,9 @@ api:
 
 # Enable OTA upgrade
 ota:
-
+  platform: esphome
+  password: !secret ota_password
+    
 i2c:
   scan: False
   frequency: 400kHz
