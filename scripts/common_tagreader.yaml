@@ -226,8 +226,9 @@ api:
 
 # Enable OTA upgrade
 ota:
-  platform: esphome
-  password: !secret ota_password
+  - platform: esphome
+    password: !secret ota_password
+  - platform: web_server
 
 i2c:
   scan: False
