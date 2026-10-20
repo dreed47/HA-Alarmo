@@ -1,16 +1,58 @@
 alias: Alarm Disarmed
-description: ""
-trigger:
-  - platform: state
-    entity_id:
+description: ''
+triggers:
+  - entity_id:
       - alarm_control_panel.alarmo
     to: disarmed
-condition: []
-action:
-  - service: switch.turn_off
-    data: {}
+    trigger: state
+conditions: []
+actions:
+  - data: {}
     target:
       entity_id:
-        - switch.smart_plug_6_socket
-        - switch.smart_plug_5_socket
+        - switch.garage_siren_alarm
+        - switch.mantle_siren_alarm
+        - switch.main_floor_siren
+        - switch.basement_floor_siren_plug
+    action: switch.turn_off
+  - data:
+      song_str: beep:d=32,o=5,b=100:b
+    continue_on_error: true
+    action: esphome.tagreader_garage_play_rtttl
+  - data:
+      song_str: beep:d=32,o=5,b=100:b
+    continue_on_error: true
+    action: esphome.tagreader_bedroom_play_rtttl
+  - data:
+      song_str: beep:d=32,o=5,b=100:b
+    continue_on_error: true
+    action: esphome.tagreader_frontdoor_play_rtttl
+  - if:
+      - condition: sun
+        after: sunset
+        before: sunrise
+        enabled: false
+      - condition: time
+        after: '22:00:00'
+        before: '09:00:00'
+        weekday:
+          - sun
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+          - sat
+    then:
+      - target:
+          entity_id: scene.night_time_lights
+        metadata: {}
+        action: scene.turn_on
+        data: {}
+    else:
+      - target:
+          entity_id: scene.day_time_lights
+        metadata: {}
+        action: scene.turn_on
+        data: {}
 mode: single

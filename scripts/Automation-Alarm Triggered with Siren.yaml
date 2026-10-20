@@ -1,34 +1,45 @@
 alias: Alarm Triggered with Siren
-description: ""
-trigger:
-  - platform: state
-    entity_id:
+description: ''
+triggers:
+  - entity_id:
       - alarm_control_panel.alarmo
     to: triggered
-condition: []
-action:
-  - service: switch.turn_on
+    trigger: state
+conditions: []
+actions:
+  - data: {}
+    target:
+      entity_id:
+        - switch.main_floor_siren
+        - switch.basement_floor_siren_plug
+      device_id:
+        - 970fd023e744c47f5f0c842d9df7d10e
+        - 92eb017609a07cc0aab95d69509a25f5
+    enabled: true
+    action: switch.turn_on
+  - target:
+      entity_id: scene.day_time_lights
+    metadata: {}
+    action: scene.turn_on
     data: {}
-    target:
-      entity_id:
-        - switch.smart_plug_6_socket
-        - switch.smart_plug_5_socket
-  - service: light.turn_on
-    data:
-      flash: short
-    target:
-      entity_id:
-        - light.chair_light
-        - light.couch_light
-        - light.floor_light
-        - light.wall_light
-  - service: switch.turn_on
-    data: {}
-    target:
-      entity_id:
-        - switch.sink_light
-        - switch.fridge_light_socket
-        - switch.counter_light_socket
-        - switch.stove_light_socket
-        - switch.computer_room_light_socket
+  - data:
+      song_str: PoliceP:d=4,o=6,b=140:8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c
+    enabled: true
+    continue_on_error: true
+    action: esphome.tagreader_garage_play_rtttl
+  - data:
+      song_str: PoliceP:d=4,o=6,b=140:8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c
+    enabled: true
+    continue_on_error: true
+    action: esphome.tagreader_bedroom_play_rtttl
+  - data:
+      song_str: PoliceP:d=4,o=6,b=140:8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c
+    enabled: true
+    continue_on_error: true
+    action: esphome.tagreader_frontdoor_play_rtttl
+  - data:
+      song_str: PoliceP:d=4,o=6,b=140:8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c,8e,8c
+    enabled: false
+    continue_on_error: true
+    action: esphome.tagreader_upstairs_hall_play_rtttl
 mode: single

@@ -1,34 +1,70 @@
-alias: "Tagreader: Set LED color"
-description: ""
-trigger:
-  - platform: state
-    entity_id:
+alias: 'Tagreader: Set LED color'
+description: ''
+triggers:
+  - entity_id:
       - alarm_control_panel.alarmo
     to: armed_away
     id: armed_away
-  - platform: state
-    entity_id:
+    trigger: state
+  - entity_id:
       - alarm_control_panel.alarmo
     to: armed_night
     id: armed_night
-  - platform: state
-    entity_id:
+    trigger: state
+  - entity_id:
       - alarm_control_panel.alarmo
     to: disarmed
     id: disarmed
-  - platform: state
-    entity_id:
+    trigger: state
+  - entity_id:
       - alarm_control_panel.alarmo
     to: arming
     id: arming
-  - platform: state
-    entity_id:
+    trigger: state
+  - entity_id:
       - alarm_control_panel.alarmo
     to: pending
     id: pending
-condition: []
-action:
+    trigger: state
+  - entity_id:
+      - alarm_control_panel.alarmo
+    to: triggered
+    id: triggered
+    trigger: state
+conditions: []
+actions:
   - choose:
+      - conditions:
+          - condition: trigger
+            id: triggered
+        sequence:
+          - repeat:
+              while:
+                - condition: state
+                  entity_id: alarm_control_panel.alarmo
+                  state: triggered
+              sequence:
+                - data:
+                    color_name: red
+                    brightness: 255
+                  target:
+                    entity_id:
+                      - light.tagreader_garage_led
+                      - light.tagreader_bedroom_led
+                      - light.tagreader_frontdoor_led
+                  continue_on_error: true
+                  action: light.turn_on
+                - delay:
+                    milliseconds: 500
+                - target:
+                    entity_id:
+                      - light.tagreader_garage_led
+                      - light.tagreader_bedroom_led
+                      - light.tagreader_frontdoor_led
+                  continue_on_error: true
+                  action: light.turn_off
+                - delay:
+                    milliseconds: 500
       - conditions:
           - condition: trigger
             id: disarmed
@@ -39,7 +75,7 @@ action:
             domain: light
           - type: turn_off
             device_id: 6d89936e9ec001024f51617b7bcdd64c
-            entity_id: light.tagreader_bedroom2_led
+            entity_id: light.tagreader_bedroom_led
             domain: light
           - type: turn_off
             device_id: 765cf27c0545a25140023e7c08010935
@@ -53,22 +89,22 @@ action:
               - condition: trigger
                 id: armed_night
         sequence:
-          - service: light.turn_on
-            data:
+          - data:
               color_name: red
               brightness: 255
             target:
               entity_id:
                 - light.tagreader_garage_led
-                - light.tagreader_bedroom2_led
+                - light.tagreader_bedroom_led
                 - light.tagreader_frontdoor_led
-          - service: light.turn_on
-            data:
+            action: light.turn_on
+          - data:
               color_name: red
-              brightness: 41
+              brightness: 35
             target:
               entity_id:
-                - light.tagreader_bedroom2_led
+                - light.tagreader_bedroom_led
+            action: light.turn_on
       - conditions:
           - condition: or
             conditions:
@@ -88,8 +124,7 @@ action:
                       entity_id: alarm_control_panel.alarmo
                       state: armed_night
               sequence:
-                - service: light.turn_on
-                  data:
+                - data:
                     rgb_color:
                       - 254
                       - 252
@@ -97,29 +132,33 @@ action:
                   target:
                     entity_id:
                       - light.tagreader_garage_led
-                      - light.tagreader_bedroom2_led
+                      - light.tagreader_bedroom_led
                       - light.tagreader_frontdoor_led
-                - service: esphome.tagreader_55a980_play_rtttl
-                  data:
+                  action: light.turn_on
+                - data:
                     song_str: Beep:d=32,o=6,b=100:8g
-                - service: esphome.tagreader_bedroom2_5d3bac_play_rtttl
-                  data:
+                  continue_on_error: true
+                  action: esphome.tagreader_garage_play_rtttl
+                - data:
                     song_str: Beep:d=32,o=6,b=100:8g
-                - service: esphome.tagreader_frontdoor_55d8f9_play_rtttl
-                  data:
+                  continue_on_error: true
+                  action: esphome.tagreader_bedroom_play_rtttl
+                - data:
                     song_str: Beep:d=32,o=6,b=100:8g
+                  continue_on_error: true
+                  action: esphome.tagreader_frontdoor_play_rtttl
                 - delay:
                     hours: 0
                     minutes: 0
                     seconds: 1
                     milliseconds: 0
-                - service: light.turn_off
-                  data: {}
+                - data: {}
                   target:
                     entity_id:
                       - light.tagreader_garage_led
-                      - light.tagreader_bedroom2_led
+                      - light.tagreader_bedroom_led
                       - light.tagreader_frontdoor_led
+                  action: light.turn_off
                 - delay:
                     hours: 0
                     minutes: 0
